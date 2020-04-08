@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Select, MenuItem, InputLabel } from '@material-ui/core'
-
+import { Select, MenuItem } from '@material-ui/core'
+import { connect } from 'react-redux'
+import { fetchData } from '../../store/actions/actions'
 const GraphContainer = styled.div`
     display: flex;
     // justify-content: space-around;
@@ -20,8 +21,9 @@ const FilterContainer = styled.div`
 const ChartContainer = styled.div``
 
 
-const GraphSection: React.FC = props => {
+const GraphSection: React.FC = (props: any) => {
 
+    const { dispatch } = props
     const countries = ['Canada', 'United States', 'France', 'Italy']
     // const provinceState = {
     //     'Canada': [
@@ -34,6 +36,11 @@ const GraphSection: React.FC = props => {
     //     ],
     //     'Italy': []
     // }
+
+    React.useEffect(() => {
+        // debugger
+        dispatch(fetchData())
+    }, [dispatch])
     return <GraphContainer> 
 
         
@@ -51,5 +58,4 @@ const GraphSection: React.FC = props => {
     </GraphContainer>
 }
 
-
-export default GraphSection
+export default connect()(GraphSection)
