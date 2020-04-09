@@ -1,21 +1,19 @@
-import {Country, Province} from './Country'
-
 export interface CountryStatus {
-    country: Country
+    country: string
     confirmed: number
     deaths: number
     recovered: number
 }
 
 export interface ProvinceStatus {
-    province: Province
+    province: string
     confirmed: number
     deaths: number
     recovered: number
 }
 
 export interface CountryTimeSeries {
-    country: Country
+    country: string
     data: {
         time: string
         confirmed: number
@@ -28,6 +26,6 @@ export interface CountryTimeSeries {
 }
 
 export interface Provinces {
-    country: Country,
+    country: string,
     provinces: string[]
 }
