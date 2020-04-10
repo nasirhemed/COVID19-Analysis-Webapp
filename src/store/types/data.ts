@@ -12,17 +12,14 @@ export interface ProvinceStatus {
     recovered: number
 }
 
-export interface CountryTimeSeries {
-    country: string
-    data: {
-        time: string
-        confirmed: number
-        deaths: number
-        recovered: number
-        active: number
-        deltaConfirmed: number
-        deltaRecovered: number
-    }[]
+export interface CountrySeries {
+    country: string,
+    dates: string[]
+    confirmed : number[]
+    recovered: number[]
+    deltaConfirmed: number[]
+    deltaRecovered: number[] 
+    deaths: number[]
 }
 
 export interface Provinces {

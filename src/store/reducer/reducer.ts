@@ -2,16 +2,18 @@ import { combineReducers } from "redux";
 
 import {
   RECEIVE_COUNTRY,
-  //   RECEIVE_SERIES,
   RECEIVE_PROVINCE,
   REQUEST_COUNTRY,
-  //   REQUEST_SERIES,
   REQUEST_PROVINCE,
+  REQUEST_SERIES,
+  RECEIVE_SERIES,
   actionType,
   RECEIVE_COUNTRY_NAMES,
-  RECEIVE_PROVINCE_NAMES
+  RECEIVE_PROVINCE_NAMES,
+  FILTER_COUNTRIES,
+  FILTER_PROVINCE
 } from "../actions/actions";
-import { CountryStatus, ProvinceStatus } from "../types/data";
+import { CountryStatus, ProvinceStatus, CountrySeries } from "../types/data";
 
 interface State {
   ui: {
@@ -30,6 +32,7 @@ interface State {
   };
   allCountryCases: CountryStatus[];
   allProvinceCases: ProvinceStatus[];
+  allSeries: CountrySeries[];
   countries: string[]
   provinces: {
       country: string
@@ -37,44 +40,25 @@ interface State {
   }[]
   filteredCountries: CountryStatus[];
   filteredStates: ProvinceStatus[];
+  filteredSeries: CountrySeries[];
   filters: {
+    level: string
     country: string[];
-    province: {
-      country: string;
-      province: string[];
-    }[];
+    province: string[];
   };
+  
 }
-/**
- * 
- *  {
-    casesCountry: {
-        isFetching: true,
-        success: true,
-        data: CountryStatus[]
-    },
-
-    casesState: {
-        isFetching: treu,
-        success: true,
-        data: ProvinceStatus[]
-    },
-    TimeSeries: {
-        isFetching: true,
-        success: true,
-        data: TimeSeries[]
-    }
-}
- */
 
 function dataSet(
   state: State = {
     allCountryCases: [],
     allProvinceCases: [],
+    allSeries: [],
     countries: [],
     provinces: [],
     filteredCountries: [],
     filteredStates: [],
+    filteredSeries: [],
     ui: {
       country: {
         fetching: false,
@@ -90,6 +74,7 @@ function dataSet(
       }
     },
     filters: {
+      level: 'World',
       country: [],
       province: []
     }
@@ -155,6 +140,38 @@ function dataSet(
             provinces: action.payload
         }
 
+    case FILTER_COUNTRIES:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          country: action.payload
+        }
+      }
+    case FILTER_PROVINCE:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          province: action.payload
+        }
+      }
+    case REQUEST_SERIES:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          series: {
+            ...state.ui.series,
+            fetching: true
+          }
+        }
+      }
+    case RECEIVE_SERIES:
+      return {
+        ...state,
+        allSeries: action.payload
+      }
     default:
       return state;
   }

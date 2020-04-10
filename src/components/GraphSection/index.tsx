@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Select, MenuItem } from '@material-ui/core'
 import { connect } from 'react-redux'
-import { fetchData } from '../../store/actions/actions'
+import { fetchCountryData, fetchProvinceData, fetchSeriesData } from '../../store/actions/actions'
 const GraphContainer = styled.div`
     display: flex;
     // justify-content: space-around;
@@ -39,7 +39,12 @@ const GraphSection: React.FC = (props: any) => {
 
     React.useEffect(() => {
         // debugger
-        dispatch(fetchData())
+        dispatch(fetchCountryData())
+        dispatch(fetchProvinceData())
+        dispatch(fetchSeriesData())
+        // dispatch(changeLevel('United States'))
+        // dispatch(filterProvinces(['Ohio', 'New York']))
+        // dispatch(filterCountries(['United States']))
     }, [dispatch])
     return <GraphContainer> 
 

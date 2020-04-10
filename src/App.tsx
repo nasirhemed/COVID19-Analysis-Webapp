@@ -6,7 +6,6 @@ import configureStore from './store/store'
 import Navbar from './components/__ui__/Navbar'
 import Tabs from './components/__ui__/Tabs'
 import GraphSection from './components/GraphSection';
-import { fetchData } from './store/actions/actions';
 
 const store = configureStore({})
 function App() {
