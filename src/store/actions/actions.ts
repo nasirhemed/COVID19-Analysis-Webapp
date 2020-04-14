@@ -237,6 +237,15 @@ export function fetchSeriesData() {
         }, []);
 
       dispatch(receiveSeries(formattedData));
+      dispatch(
+        filterCountries([
+          "US",
+          "Canada",
+          "Italy",
+          "Spain",
+          "United Kingdom"
+        ])
+      );
     });
   };
 }

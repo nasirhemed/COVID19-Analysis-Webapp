@@ -15,7 +15,7 @@ import {
 } from "../actions/actions";
 import { CountryStatus, ProvinceStatus, CountrySeries } from "../types/data";
 
-interface State {
+export interface State {
   ui: {
     country: {
       fetching: boolean;
@@ -39,7 +39,7 @@ interface State {
       provinces: string[]
   }[]
   filteredCountries: CountryStatus[];
-  filteredStates: ProvinceStatus[];
+  filteredProvinces: ProvinceStatus[];
   filteredSeries: CountrySeries[];
   filters: {
     level: string
@@ -57,7 +57,7 @@ function dataSet(
     countries: [],
     provinces: [],
     filteredCountries: [],
-    filteredStates: [],
+    filteredProvinces: [],
     filteredSeries: [],
     ui: {
       country: {
@@ -143,6 +143,8 @@ function dataSet(
     case FILTER_COUNTRIES:
       return {
         ...state,
+        filteredCountries: state.allCountryCases.filter(country => action.payload.includes(country.country)),
+        filteredSeries: state.allSeries.filter(country => action.payload.includes(country.country)),
         filters: {
           ...state.filters,
           country: action.payload
@@ -151,6 +153,7 @@ function dataSet(
     case FILTER_PROVINCE:
       return {
         ...state,
+        filteredProvinces: state.allProvinceCases.filter(province => action.payload.includes(province.province)),
         filters: {
           ...state.filters,
           province: action.payload

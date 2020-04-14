@@ -20,10 +20,9 @@ const Tabs: React.FC<Props> = props => {
       indicatorColor="primary"
       textColor="primary"
       onChange={handleChange}
-      aria-label="disabled tabs example"
     >
-      {tabs.map(tabName => 
-        <MuiTab label={tabName} />
+      {tabs.map((tabName, index) => 
+        <MuiTab key={index} label={tabName} />
       )}
     </MuiTabs>
   );

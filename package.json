@@ -13,9 +13,12 @@
     "@types/node": "^12.12.30",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
+    "@types/react-plotly.js": "^2.2.4",
     "@types/react-redux": "^7.1.7",
     "@types/redux-logger": "^3.0.7",
     "@types/styled-components": "^5.0.1",
+    "moment": "^2.24.0",
+    "plotly.js": "^1.53.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-plotly.js": "^2.4.0",
@@ -27,7 +30,7 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --max_old_space_size=8192 start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
