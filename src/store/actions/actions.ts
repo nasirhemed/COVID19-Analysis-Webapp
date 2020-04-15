@@ -210,6 +210,7 @@ export function fetchSeriesData() {
     const data = d3.csv(TIME_SERIES_URL, d => ({
       country: d.Country_Region as string,
       date: d.Last_Update as string,
+      province: d.Province_State,
       confirmed: Number(d.Confirmed),
       recovered: Number(d.Recovered),
       deaths: Number(d.Deaths),
@@ -218,6 +219,7 @@ export function fetchSeriesData() {
     }));
 
     return data.then(series => {
+      const countriesOnly = series.filter(value => !value.province)
       const formattedData = d3
         .nest<typeof series[0], CountrySeries>()
         .key(d => d.country)
@@ -230,7 +232,7 @@ export function fetchSeriesData() {
           deltaConfirmed: v.map(d => d.deltaConfirmed),
           deltaRecovered: v.map(d => d.deltaRecovered)
         }))
-        .entries(series)
+        .entries(countriesOnly)
         .reduce<CountrySeries[]>((result, el) => {
           el.value && result.push(el.value);
           return result;
