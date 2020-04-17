@@ -26,3 +26,15 @@ export interface Provinces {
     country: string,
     provinces: string[]
 }
+
+export const types = [
+    'World',
+    'US',
+    'Canada',
+    'United Kingdom',
+    'China',
+    'Netherlands',
+    'Australia',
+    'Denmark',
+    'France'
+]

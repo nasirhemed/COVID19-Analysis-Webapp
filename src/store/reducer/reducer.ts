@@ -11,7 +11,8 @@ import {
   RECEIVE_COUNTRY_NAMES,
   RECEIVE_PROVINCE_NAMES,
   FILTER_COUNTRIES,
-  FILTER_PROVINCE
+  FILTER_PROVINCE,
+  CHANGE_LEVEL
 } from "../actions/actions";
 import { CountryStatus, ProvinceStatus, CountrySeries } from "../types/data";
 
@@ -174,6 +175,15 @@ function dataSet(
       return {
         ...state,
         allSeries: action.payload
+      }
+    case CHANGE_LEVEL:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          province: [],
+          level: action.payload
+        }
       }
     default:
       return state;

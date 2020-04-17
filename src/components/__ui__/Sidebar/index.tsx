@@ -47,38 +47,56 @@ interface Props {
     selectedType: string
     types: string[]
     provinces: string[]
-    selectedFilters?: string[]
+    selectedFilters: string[]
     countries: string[]
     handleChangeType: (type: string) => void
-    handleFilter?: (filters: string[]) => void
+    handleFilter: (filters: string[]) => void
 }
 
 const Sidebar: React.FC<Props> = props => {
 
-    const { types, selectedType, provinces, countries, handleChangeType, handleFilter } = props
+    const { types, selectedType, provinces, countries, handleChangeType, handleFilter, selectedFilters } = props
 
     const filters = selectedType === 'World' ? countries : provinces
+    const sortedFilters = filters.sort()
 
     const classes = useStyles()
+
+    const handleCheckbox = (event: React.ChangeEvent) => {
+
+        const checked = (event.target as any).checked
+        const name = (event.target as any).name
+        const filters = [...selectedFilters]
+        if (checked) {
+            filters.push(name)
+        }
+        else {
+            const index = filters.indexOf(name)
+            if (index > -1) {
+                filters.splice(index, 1)
+            }
+        }
+        handleFilter(filters)
+    }
 
     return <Container>
         <Title>Selectors</Title>
 
         <DropdownContainer>
-            <Select value={selectedType}>
-                {types.map((type, index) => <MenuItem key={index} value={type} onChange={(event) => handleChangeType((event.target as any).value)}>{type}</MenuItem>)}
+            <Select onChange={(event) => handleChangeType((event.target as any).value)} value={selectedType}>
+                {types.map((type, index) => <MenuItem key={index} value={type} >{type}</MenuItem>)}
             </Select>
         </DropdownContainer>
 
         <CheckboxContainer>
-            {filters.map(area =>
+            {sortedFilters.map(area =>
                 <FormControlLabel
                     className={classes.formControl}
                     control={
                         <Checkbox
-                            checked={false}
-                            onChange={(_) => undefined}
-                            name={'test'}
+                            checked={selectedFilters.includes(area)}
+                            onChange={handleCheckbox}
+                            name={area}
                         />}
                     label={area}
                 />

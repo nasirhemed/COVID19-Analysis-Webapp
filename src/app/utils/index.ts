@@ -1,4 +1,4 @@
-import { CountrySeries, CountryStatus } from "../../store/types/data"
+import { CountrySeries, CountryStatus, ProvinceStatus } from "../../store/types/data"
 
 
 export const getGroupedData = (data: CountrySeries[], days = 7) => {
@@ -48,7 +48,7 @@ export const getGroupedData = (data: CountrySeries[], days = 7) => {
 }
 
 
-export const sortCountries = (countries : CountryStatus[]) => {
+export const sortCountries = (countries : CountryStatus[] | ProvinceStatus[]) => {
     return [...countries].sort((a, b) => sortHandler(a, b, 'confirmed'))
 }
 
