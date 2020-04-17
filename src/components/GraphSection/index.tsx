@@ -5,6 +5,8 @@ import moment from "moment";
 import Chart from "../__ui__/BarGraph";
 import Sidebar from "../__ui__/Sidebar";
 import { State } from "../../store/reducer/reducer";
+
+
 import {
   ProvinceStatus,
   CountrySeries,
@@ -106,8 +108,8 @@ const GraphSection: React.FC<Props> = props => {
       />
 
       <ChartContainer>
-        {!isEmpty && <Chart data={data} title={"lol"} />}
-        <Plot data={seriesData} layout={{ title: "Trend" }} />
+        {!isEmpty && <Chart data={data} title={"Number of Cases against Country"} />}
+        <Plot data={seriesData} layout={{ title: "Trend line of the cases" }} config={{displayModeBar: false}} />
       </ChartContainer>
     </GraphContainer>
   );
